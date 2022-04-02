@@ -8,7 +8,7 @@ import config from './configs/config'
 import authRoute from './routes/auth.route'
 import rootRoute from './routes/root.route'
 
-import authMiddleware from './middlewares/auth.middleware'
+import authMiddleware from './security/auth.middleware'
 
 config.setup(path.join(__dirname, '../.env'))
 

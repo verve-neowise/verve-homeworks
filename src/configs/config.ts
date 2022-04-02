@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 
 class Configs {
 
-    _jwtSecret: string = ''
+    private _jwtSecret: string = ''
 
     setup(path: string) {
         dotenv.config({ path })

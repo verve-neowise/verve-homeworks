@@ -23,5 +23,8 @@
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
     "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8"
   }
 }

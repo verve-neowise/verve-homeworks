@@ -1,20 +1,22 @@
+import path from 'path'
+import config from './configs/config'
+
 import express from 'express'
 import { engine } from 'express-handlebars'
-import path from 'path'
 
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 
-import config from './configs/config'
+config.setup(path.join(__dirname, '../.env'))
 
 // Routers
 import authRoute from './routes/auth.route'
 import homeRoute from './routes/home.route'
 import rootRoute from './routes/root.route'
+import groupsRoute from './routes/groups.route'
 
 import authMiddleware from './security/auth.middleware'
 
-config.setup(path.join(__dirname, '../.env'))
 
 const app = express()
 
@@ -26,6 +28,7 @@ app.use(cookieParser())
 app.use(session({
     secret: config.sessionSecret,
     proxy: true,
+    resave: true,
     saveUninitialized: true
 }))
 
@@ -38,6 +41,7 @@ app.use(authMiddleware)
 app.use('/', rootRoute)
 app.use('/home', homeRoute)
 app.use('/auth', authRoute)
+app.use('/groups', groupsRoute)
 
 const port = process.env.PORT || 3000 
 app.listen(port, () => {

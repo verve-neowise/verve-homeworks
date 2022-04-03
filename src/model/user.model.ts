@@ -1,6 +1,6 @@
 export enum Role {
-    User,
-    Admin
+    User = 'user',
+    Admin = 'admin'
 }
 
 export default class User {

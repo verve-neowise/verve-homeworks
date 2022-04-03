@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+        Add Group
+    </button>
+</div>
+
+<table class="table table-bordered mt-5">
+    <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+    </thead>
+    <tbody>
+        {{#each groups}}
+        <tr>
+            <th scope="row">{{id}}</th>
+            <td>{{name}}</td>
+            <td>{{desc}}</td>
+            <td>
+                <a href="/groups/:{{id}}" class="btn btn-primary btn-sm">Show</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{!-- <div class="card" style="width: 18rem;">
+    <div class="card-header">{{name}}</div>
+    <div class="card-body">{{desc}}</div>
+    <div class="card-footer">
+
+    </div>
+</div> --}}
+
+<div class="modal fade" id="addGroupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Group</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/groups" method="post" class="modal-body">
+                <div class="mb-3">
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+                </div>
+
+                <div class="mb-3">
+                    <textarea id="desc" name="desc" class="form-control" maxlength="128" rows="4"></textarea>
+                </div>
+                <hr class="divider">
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

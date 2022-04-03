@@ -14,25 +14,20 @@ declare module "express-session" {
 
 export default function(req: Request, res: Response, next: NextFunction) {
     
-    console.log(req.url);
-
     if (isOpen(req.url)) {
         return next()
     }
     const token = req.session.token
     // Not authorized
     if (!token) {
-        req.session.error = "You are not authorized!"
-        return res.redirect('/auth/login')
+        return res.redirect('/auth')
     }
 
     let payload = verify(token)
-    console.log(payload);
     
     // No has token
     if (!payload) {
-        req.session.error = "You are not authorized!"
-        return res.redirect('/auth/login')
+        return res.redirect('/auth')
     }
 
     if (isPermitted(req.url, payload.role)) {
@@ -41,8 +36,7 @@ export default function(req: Request, res: Response, next: NextFunction) {
     }
     // Not authorized
     else {
-        req.session.error = "You are not authorized!"
-        return res.redirect('/auth/login')
+        return res.redirect('/home')
     }
 }
 

@@ -6,8 +6,7 @@ function permitFor(role: Role, routes: string[]) {
     permissions.set(role, routes)
 }
 const openRoutes = [
-    '/auth/login',
-    '/auth/register'
+    '/auth',
 ]
 
 permitFor(Role.User, [
@@ -16,7 +15,8 @@ permitFor(Role.User, [
 
 permitFor(Role.Admin, [
     '/admin',
-    '/home'
+    '/home',
+    '^/groups'
 ])
 
 export const isOpen = (route: string) => {
@@ -24,6 +24,7 @@ export const isOpen = (route: string) => {
 }
 
 export const isPermitted = (route: string, role: Role) => {
-    console.log(route, role);
-    return permissions.get(role)!.includes(route)
+    return permissions.get(role)!.some(exp => {
+        return new RegExp(exp).test(route)
+    })
 }

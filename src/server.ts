@@ -2,10 +2,14 @@ import express from 'express'
 import { engine } from 'express-handlebars'
 import path from 'path'
 
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+
 import config from './configs/config'
 
 // Routers
 import authRoute from './routes/auth.route'
+import homeRoute from './routes/home.route'
 import rootRoute from './routes/root.route'
 
 import authMiddleware from './security/auth.middleware'
@@ -18,6 +22,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../public')))
 
+app.use(cookieParser())
+app.use(session({
+    secret: config.sessionSecret,
+    proxy: true,
+    saveUninitialized: true
+}))
+
 app.engine('.hbs', engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs')
 app.set('views', './pages')
@@ -25,6 +36,7 @@ app.set('views', './pages')
 app.use(authMiddleware)
 
 app.use('/', rootRoute)
+app.use('/home', homeRoute)
 app.use('/auth', authRoute)
 
 const port = process.env.PORT || 3000 

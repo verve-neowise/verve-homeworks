@@ -1,32 +1,49 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken'
 import config from "../configs/config";
-import { JwtData } from "./jwt.model";
-import permission from "./permission";
+import { JwtData } from "./jwt.data";
+import { isOpen, isPermitted } from "./permission";
+
+
+declare module "express-session" {
+    interface SessionData {
+        token: string,
+        error: string
+    }
+}
 
 export default function(req: Request, res: Response, next: NextFunction) {
-    const token = req.header('Authorization') || req.body.token || req.cookies.token 
+    
+    console.log(req.url);
 
+    if (isOpen(req.url)) {
+        return next()
+    }
+    const token = req.session.token
     // Not authorized
     if (!token) {
-        return res.sendStatus(401)
+        req.session.error = "You are not authorized!"
+        return res.redirect('/auth/login')
     }
 
     let payload = verify(token)
-
-    if (payload) {
-
-        console.log(payload);
-
-        if (permission(req.url, payload.role)) {
-            next()
-        }
-        else {
-            return res.sendStatus(403)
-        }
+    console.log(payload);
+    
+    // No has token
+    if (!payload) {
+        req.session.error = "You are not authorized!"
+        return res.redirect('/auth/login')
     }
-    // wrong credentials or token expired
-    return res.sendStatus(401)
+
+    if (isPermitted(req.url, payload.role)) {
+        req.payload = payload
+        return next()
+    }
+    // Not authorized
+    else {
+        req.session.error = "You are not authorized!"
+        return res.redirect('/auth/login')
+    }
 }
 
 function verify(token: string): JwtData | undefined  {

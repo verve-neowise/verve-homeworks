@@ -1,57 +1,64 @@
-<h1>{{title}}</h1>
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="fw-bold">{{title}}</h5>
+        <p class="text-secondary">{{desc}}</p>
+    </div>
+</div>
 
 <div class="row">
-    <div class="col p-3 me-5">
-        <h1 class="display-5 mb-3"> Pupils: </h1>
-
-        <div class="d-flex gap-3 mt-3 justify-content-end">
-            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addPupilModal">Add
-                Pupil</button>
+    <div class="col">
+        <div class="card">
+            <div class="card-header  d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"> Pupils </h5>
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addPupilModal">
+                    Add Pupil
+                </button>
+            </div>
+            <div class="card-body">
+                <ol class="list-group mt-3">
+                    {{#each pupils}}
+                    <li class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                        {{name}} {{surname}}
+                        <div class="dropdown dropend">
+                            <button class="btn menu-btn" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+            </div>
         </div>
-
-        <ol class="list-group mt-3">
-            {{#each pupils}}
-            <li class="list-group-item d-flex align-items-center justify-content-between">
-                {{name}} {{surname}}
-                <div class="dropdown dropend">
-                    <button class="btn menu-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-trash"></i> Remove</a></li>
-                    </ul>
-                </div>
-            </li>
-            {{/each}}
-        </ol>
     </div>
 
-    <div class="col p-3">
-        <h1 class="display-5 mb-3"> Homeworks: </h1>
-
-        <div class="d-flex gap-3 mt-3 justify-content-end">
-            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addHomeworkModal">Add
-                Homework</button>
-        </div>
-
-        <ul class="list-group  mt-3">
-            {{#each homeworks}}
-            <li class="list-group-item d-flex align-items-center justify-content-between">
-                {{name}}
-                <div class="dropdown dropend">
-                    <button class="btn menu-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-trash"></i> Remove</a></li>
-                    </ul>
+    <div class="col">
+        <div class="card">
+            <div class="card-header  d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"> Homeworks </h5>
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addHomeworkModal">
+                    Add Homework
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {{#each homeworks}}
+                    <a href="/groups/{{../id}}/homework/{{id}}" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="fw-bold mb-1">{{name}}</h6>
+                            <small class="text-secondary">{{date}}</small>
+                        </div>
+                        <small>{{desc}}</small>
+                    </a>
+                    {{/each}}
                 </div>
-            </li>
-            {{/each}}
-        </ul>
+            </div>
+        </div>
     </div>
+
 </div>
 
 
@@ -63,7 +70,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Add pupil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/groups/{{id}}/user" method="post" class="modal-body">
+            <form action="/groups/{{id}}/user" method="post" class="modal-body" autocomplete="off">
                 <div class="mb-3">
                     <input id="name" name="name" type="text" class="form-control" placeholder="Name">
                 </div>
@@ -97,7 +104,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Add Homework</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/groups/{{id}}/homework" method="post" class="modal-body">
+            <form action="/groups/{{id}}/homework" method="post" class="modal-body" autocomplete="off">
                 <div class="mb-3">
                     <input id="name" name="name" type="text" class="form-control" placeholder="Name">
                 </div>

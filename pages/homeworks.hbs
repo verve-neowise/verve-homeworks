@@ -1,0 +1,40 @@
+<h1 class="p-3">Homework</h1>
+<div class="row">
+    <div class="col-5">
+        <div class="card my-3">
+            <div class="card-header">Tasks</div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {{#each tasks}}
+                    <li aria-current="true" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{name}}</h6>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="badge {{#if result}} bg-success {{else}} bg-warning {{/if}} badge-sm">
+                                    {{state}} </div>
+                                <a class="btn btn-primary {{#if result}} {{else}} disabled {{/if}} btn-sm">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-7">
+        <div class="card my-3">
+            <div class="card-body">
+                <div class=" d-flex justify-content-between">
+                    <h5 class="fw-bold">
+                        {{homework.name}}
+                    </h5>
+                    <small class="text-secondary">{{homework.date}}</small>
+                </div>
+                <p class="text-secondary">{{homework.desc}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

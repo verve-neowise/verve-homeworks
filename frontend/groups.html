@@ -11,60 +11,92 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Groups</title>
+    <title>Dashboard</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light vh-100">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Groups</a>
-            <span class="text-white">@Username</span>
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <span class="text-white d-flex">
+                <div class="dropdown dropstart dropdown">
+                    <button class="btn menu-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class=" text-white fa-solid fa-user-astronaut"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+                        <li class="text-secondary px-2">
+                            <h6>Username</h6>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                 <i class="fa-solid fa-add"></i> 
+                                Add Group
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </span>
         </div>
     </nav>
-    <div class="container-sm p-4">
-
-        <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGroupModal">
-                Add Group
-            </button>
+    <div>
+        <div class="d-flex bg-light align-items-stretch">
+            <div style="flex: 1" class="shadow-sm list-group list-group-flush border border-right ">
+                <li class="list-group-item">
+                    <a href="#" class="text-decoration-none">
+                        <div class="d-flex justify-content-center align-items-center py-4">
+                            <i class="fa-solid fa-layer-group text-dark fa-xl"></i>
+                        </div>
+                        <div style="font-size: 14px; text-align: center;" class=" fw-bold text-dark">Node.js 142</div>
+                    </a>
+                </li>
+                
+            </div>
+            <div style="flex: 9" class="container-fluid">
+            </div>
         </div>
-
+<!-- 
         <div class="d-flex flex-wrap mt-5">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header">Group name</div>
-                <div class="card-body">Lorem ipsum dolor sit amet.</div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Show</a>
+            <a href="#" class="card text-decoration-none">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center align-items-center p-4">
+                        <i class="fa-solid fa-layer-group text-dark fa-2xl"></i>
+                    </div>
+                    <h6 class="p-3 text-dark">Node.js 142</h6>
+                </div>
+            </a>
+        </div> -->
+
+        <div class="modal fade" id="addGroupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Group</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/groups" method="post" class="modal-body">
+                        <div class="mb-3">
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea id="desc" name="desc" class="form-control" maxlength="128" rows="4"></textarea>
+                        </div>
+                        <hr class="divider">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="modal fade" id="addGroupModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Group</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="/groups" method="post" class="modal-body">
-                    <div class="mb-3">
-                        <input id="name" name="name" type="text" class="form-control" placeholder="Name">
-                    </div>
-
-                    <div class="mb-3">
-                        <textarea id="desc" name="desc" class="form-control" maxlength="128" rows="4"></textarea>
-                    </div>
-                    <hr class="divider">
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

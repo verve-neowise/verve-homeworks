@@ -1,19 +1,18 @@
-export default class Group {
+export default class Homework {
     readonly id: string
     readonly name: string
     readonly desc: string
-    readonly userId: number
-    active: string = ''
+    readonly date: string
 
     constructor(
-        id: string = '0',
+        id: string,
         name: string,
         desc: string,
-        userId: number
+        date: string
     ) {
         this.id = id
         this.name = name
-        this.userId = userId
         this.desc = desc
+        this.date = date
     }
 }

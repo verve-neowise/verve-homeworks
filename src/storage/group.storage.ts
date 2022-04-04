@@ -30,7 +30,6 @@ async function allGroups(): Promise<(Group | undefined)[] > {
 }
 
 function mapGroup(data: any): Group | undefined {
-    console.log(data);
     return data ? new Group(
         data.id,
         data.name,

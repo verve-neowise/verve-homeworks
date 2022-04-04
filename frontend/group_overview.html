@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Node.js 145</title>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand" href="#">
+                <a href="/groups">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                Node.js 145
+            </span>
+            <span class="text-white">@Username</span>
+        </div>
+    </nav>
+
+    <div class="container-sm p-4">
+
+        <div class="row">
+            <div class="col p-3 me-5">
+                <h1 class="display-5 mb-3"> Pupils: </h1>
+
+                <div class="d-flex gap-3 mt-3 justify-content-end">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addPupilModal">Add
+                        Pupil</button>
+                </div>
+                <ol class="list-group mt-3">
+                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                        Codership Masharipov
+                        <div class="dropdown dropend">
+                            <button class="btn menu-btn" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pen"></i> Edit</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="col p-3">
+                <h1 class="display-5 mb-3"> Homeworks: </h1>
+
+                <div class="d-flex gap-3 mt-3 justify-content-end">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#addHomeworkModal">Add Homework</button>
+                </div>
+
+                <ul class="list-group  mt-3">
+                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                        HTML/CSS Basics
+                        <div class="dropdown dropend">
+                            <button class="btn menu-btn" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-eye"></i> Show</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-pen"></i> Edit</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-trash"></i> Remove</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="addPupilModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add pupil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/groups" method="post" class="modal-body">
+                        <div class="mb-3">
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <input id="name" name="surname" type="text" class="form-control" placeholder="Surname">
+                        </div>
+
+                        <div class="mb-3">
+                            <input id="name" name="login" type="text" class="form-control" placeholder="Login">
+                        </div>
+
+                        <div class="mb-3">
+                            <input id="name" name="password" type="password" class="form-control"
+                                placeholder="Password">
+                        </div>
+
+                        <hr class="divider">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addHomeworkModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add Homework</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/groups" method="post" class="modal-body">
+                        <div class="mb-3">
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea id="desc" name="desc" type="text" class="form-control" placeholder="Desc"
+                                rows="5"></textarea>
+                        </div>
+
+                        <hr class="divider">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .menu-btn:focus {
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.129);
+                aspect-ratio: 1/1;
+            }
+        </style>
+    </div>
+
+
+
+</body>
+
+</html>

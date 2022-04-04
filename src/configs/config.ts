@@ -8,9 +8,9 @@ class Configs {
 
     setup(path: string) {
         dotenv.config({ path })
-        this._jwtSecret = process.env.jwt_secret!
-        this._sessionSecret = process.env.session_secret!
-        this._database = process.env.sqlite_path!
+        this._jwtSecret = process.env.JWT_SECRET!
+        this._sessionSecret = process.env.SESSION_SECRET!
+        this._database = process.env.DATABASE!
     }
     
     public get jwtSecret() : string {

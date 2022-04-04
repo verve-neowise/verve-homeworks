@@ -17,17 +17,39 @@ async function addUser(user: User) {
     ])
 }
 
+async function findUsersByGroup(groupId: string): Promise<User[]> {
+    let query = 'SELECT * FROM users WHERE group_id = ?'
+    let data = await storage.all(query, [groupId])
+    return data.map(mapUser)
+}
+
 async function findUser(username: string): Promise<User> {
     let query = 'SELECT * FROM users WHERE username = ?'
-    return await storage.get(query, [username])
+    let data = await storage.get(query, [username])
+    return mapUser(data)
 }
 
 async function allUsers() {
     let query = 'SELECT * FROM users WHERE role="USER"'
-    return await storage.get(query)
+    let datas = await storage.all(query)
+    return datas.map(mapUser)
+}
+
+function mapUser(data: any): User {
+    return new User(
+        data.id,
+        data.username,
+        data.password,
+        data.name,
+        data.surname,
+        data.group_id,
+        data.role
+    )
 }
 
 export default {
     addUser,
-    findUser
+    findUser,
+    allUsers,
+    findUsersByGroup
 }

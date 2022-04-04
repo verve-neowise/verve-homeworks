@@ -17,7 +17,6 @@ import groupsRoute from './routes/groups.route'
 
 import authMiddleware from './security/auth.middleware'
 
-
 const app = express()
 
 app.use(express.json())

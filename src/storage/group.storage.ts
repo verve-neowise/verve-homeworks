@@ -6,9 +6,10 @@ async function addGroup(group: Group) {
     await storage.run(query, [group.name, group.desc, group.userId])
 }
 
-async function findGroup(groupId: number): Promise<Group> {
+async function findGroup(groupId: string): Promise<(Group | undefined)> {
     let query = "select * from groups where id = ?"
-    return await storage.get(query, [groupId]) 
+    let data =  await storage.get(query, [groupId]) 
+    return mapGroup(data)
 }
 
 async function deleteGroup(groupId: number) {
@@ -16,14 +17,26 @@ async function deleteGroup(groupId: number) {
     await storage.run(query, [groupId])
 }
 
-async function userGroups(userId: number): Promise<Group[]> {
+async function userGroups(userId: number): Promise<(Group | undefined)[]> {
     let query = "select * from groups where user_id = ?"
-    return await storage.all(query, [userId])
+    let datas =  await storage.all(query, [userId])
+    return datas.map(mapGroup)
 }
 
-async function allGroups(): Promise<Group[]> {
+async function allGroups(): Promise<(Group | undefined)[] > {
     let query = "select * from groups"
-    return storage.all(query)
+    let datas = await storage.all(query)
+    return datas.map(mapGroup)
+}
+
+function mapGroup(data: any): Group | undefined {
+    console.log(data);
+    return data ? new Group(
+        data.id,
+        data.name,
+        data.desc,
+        data.user_id
+    ) : undefined
 }
 
 export default {

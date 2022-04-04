@@ -9,8 +9,6 @@ router.get('/', async (req, res) => {
     
     if (req.payload.role == Role.Admin) {
 
-        console.log("redirect from /home: ", req.payload);
-        
         res.redirect('/groups')
     }
     else {

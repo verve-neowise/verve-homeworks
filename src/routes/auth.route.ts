@@ -11,8 +11,6 @@ router.get('/', (req, res) => {
 
     let error = req.session.error
     req.session.error = undefined
-    console.log(error);
-    
     res.render('login', { error })
 })
 
@@ -20,7 +18,7 @@ router.post('/', async (req, res) => {
     let { username, password } = req.body
 
     let user = await userStorage.findUser(username)
-    
+
     if (user && bcrypt.compareSync(password, user.password)) {
         
         let data: JwtData = { userId: user.id, role: user.role, username: username }
